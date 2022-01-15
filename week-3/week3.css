@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+  font-size: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 10px;
+}
+
+.header {
+  text-align: left;
+}
+
+.nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-self: end;
+}
+
+.nav-item {
+  margin-left: 10px;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 5px 10px;
+  margin: auto;
+}
+
+.greet {
+  font-size: 2rem;
+  height: 300px;
+  line-height: 300px;
+  background-color: rgb(219, 235, 245);
+  text-align: center;
+  width: 100%;
+}
+
+#flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 10px;
+  margin: auto;
+}
+
+
+.item {
+  margin:10px 0px 10px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(219, 235, 245);
+}
+
+.img {
+  object-fit: cover;
+}
+
+.btn_block {
+  margin: 50px;
+  text-align: center;
+}
+
+#btn {
+  font-size: 1rem;
+  color: white;
+  border: 1px solid rgb(179, 173, 173);
+  box-shadow: 2px 2px rgba(58, 57, 57, 0.2);
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: rgb(72, 142, 185);
+  cursor: pointer;
+}
+
+@media all and (min-width: 1200.01px) {
+  #flex-container {
+    width: 1200px;
+  }
+
+  .item {
+    width: 290px;
+  }
+
+  .img {
+    height: 220px;
+  }
+
+  .title {
+    height: 60px;
+  }
+
+  .dropdown {
+    display: none;
+  }
+}
+
+@media all and (max-width: 1200px) {
+  #flex-container {
+    width: 90vw;
+    margin-top: 10px;
+  }
+
+  .item {
+    width: 45%;
+  }
+
+  img {
+    width: 100%;
+    height: 80%;
+  }
+
+  .dropdown {
+    display: none;
+  }
+}
+
+@media all and (max-width: 600px) {
+  #flex-container {
+    width: 90vw;
+  }
+
+  .item {
+    width: 100%;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .nav-item {
+    display: none;
+  }
+
+  .dropdown {
+    height: 32px;
+    width: 32px;
+    display: block;
+    grid-area: 1 / 4 / 2 / 5;
+  }
+}
