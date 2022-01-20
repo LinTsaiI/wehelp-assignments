@@ -10,12 +10,12 @@ function getData() {
       .then(response => response.json())
       .then(data => {
         let results = data.result.results;
-        let attractions = { 'title_list': [], 'img_list': [] };
+        let attractions = { 'titleList': [], 'imgList': [] };
         for (let i in results) {
           let img = results[i].file.replaceAll('https', ' https').split(' ')
-          attractions['img_list'].push(img[1])
+          attractions['imgList'].push(img[1])
           let title = results[i].stitle
-          attractions['title_list'].push(title)
+          attractions['titleList'].push(title)
         }
         return attractions;
       })
@@ -29,17 +29,17 @@ function getData() {
 //   <div class='title'>title</div>
 // </div >
 function add_item(imgURL, title) {
-  let item = document.createElement('div')   // 建立外層<div></div>
+  let item = document.createElement('div');   // 建立外層<div></div>
   item.className = 'item'   // <div class='item'></div>
-  let img = document.createElement('img')   // 建立<img />
+  let img = document.createElement('img');   // 建立<img />
   img.className = 'img'   // <img class='img' />
   img.src = imgURL   // <img class='img' src='imgURL' />
-  let title_text = document.createElement('div')   // 建立<div></div>
-  title_text.className = 'title'   // <div class='title></div>
-  title_textNode = document.createTextNode(title)
-  title_text.appendChild(title_textNode)   // <div class='title'>title</div>
+  let titleText = document.createElement('div');   // 建立<div></div>
+  titleText.className = 'title'   // <div class='title></div>
+  titleTextNode = document.createTextNode(title)
+  titleText.appendChild(titleTextNode)   // <div class='title'>title</div>
   item.appendChild(img)
-  item.appendChild(title_text)
+  item.appendChild(titleText)
   return item;
 }
 
@@ -47,11 +47,11 @@ function add_item(imgURL, title) {
 function load() {
   getData()
     .then(attractions => {
-      let imgURL_list = attractions['img_list'];
-      let title_list = attractions['title_list'];
+      let imgURLList = attractions.imgList;   // 同attractions['imgList']
+      let titleList = attractions.titleList;   // 同attractions['titleList']
       for (let i = 0; i < 8; i++) {
-        let item_block = add_item(imgURL_list[i], title_list[i])
-        container.appendChild(item_block)
+        let itemBlock = add_item(imgURLList[i], titleList[i]);
+        container.appendChild(itemBlock)
       }
     })
     .catch(error => console.log('Error:', error))
@@ -62,23 +62,23 @@ function load() {
 let clicked = 0;   // 紀錄Load More被按下的次數，按下前為0
 function loadMore() {
   clicked += 1   // 每執行一次loadMore()按鍵被按次數+1
-  console.log(clicked)
-  let current_items = 8 * clicked   // 載入下8張圖片前，當前的圖片數目
+  // console.log(clicked)
+  let currentItems = 8 * clicked   // 載入下8張圖片前，當前的圖片數目
   getData()
     .then(attractions => {
-      let imgURL_list = attractions['img_list'];
-      let title_list = attractions['title_list'];
+      let imgURLList = attractions['imgList'];
+      let titleList = attractions['titleList'];
       // 若剩下還未顯示的張數大於8張，則一次顯示8張
-      if (title_list.length - current_items >= 8) {
+      if (titleList.length - currentItems >= 8) {
         for (let i = 8*clicked; i < 8*(clicked+1); i++) {
-          let item_block = add_item(imgURL_list[i], title_list[i])
-          container.appendChild(item_block)
+          let itemBlock = add_item(imgURLList[i], titleList[i])
+          container.appendChild(itemBlock)
         }
       } else {
         // 若剩下的張數不足8張，則一張一張顯示直到沒有圖片
-        for (let i = 8*clicked; i < title_list.length; i++) {
-          let item_block = add_item(imgURL_list[i], title_list[i])
-          container.appendChild(item_block)
+        for (let i = 8*clicked; i < titleList.length; i++) {
+          let itemBlock = add_item(imgURLList[i], titleList[i])
+          container.appendChild(itemBlock)
         }
         // 當圖片全部顯示則Load More按鍵消失
         document.getElementById('btn').hidden = true;
@@ -89,5 +89,5 @@ function loadMore() {
 
 
 load();
-let btn = document.getElementById('btn')
-btn.addEventListener('click', loadMore)
+let btn = document.getElementById('btn');
+btn.addEventListener('click', loadMore);   // 當按下Load More按鍵，執行load8()函數，load8()執行8次add_item()

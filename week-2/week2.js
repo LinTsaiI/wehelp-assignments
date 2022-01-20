@@ -63,28 +63,28 @@ maxProduct([-1, 0, 2]) // 得到 0
 maxProduct([-1, -2, 0]) // 得到 2
 
 // 另一個寫法：
-function maxProduct(nums) {
-  let numsNew = [];
-  for (let i = 0; i < nums.length; i++) {
-    for (let j = 0; j < i; j++) {
-      let num = nums[i] * nums[j];
-      numsNew.push(num);
-    }
-  }
-  console.log(Math.max(...numsNew));
-}
+// function maxProduct(nums) {
+//   let numsNew = [];
+//   for (let i = 0; i < nums.length; i++) {
+//     for (let j = 0; j < i; j++) {
+//       let num = nums[i] * nums[j];
+//       numsNew.push(num);
+//     }
+//   }
+//   console.log(Math.max(...numsNew));
+// }
 
 // 使用 map 改寫：
-function maxProduct(nums) {
-  let numsNew = [];
-  nums.map((n, i) => {
-    for(let j = i + 1; j < nums.length; j++) {
-      numsNew.push(n * nums[j]);
-    }
-  });
-  console.log(Math.max(...numsNew));
-}
-maxProduct([5, 20, 2, 6]) // 得到 120
+// function maxProduct(nums) {
+//   let numsNew = [];
+//   nums.map((n, i) => {
+//     for(let j = i + 1; j < nums.length; j++) {
+//       numsNew.push(n * nums[j]);
+//     }
+//   });
+//   console.log(Math.max(...numsNew));
+// }
+// maxProduct([5, 20, 2, 6]) // 得到 120
 
 
 
@@ -103,47 +103,47 @@ function twoSum(nums, target) {
 let result = twoSum([2, 11, 7, 15], 9);
 console.log(result); // show [0, 2] because nums[0]+nums[2] is 9
 
-// 另一個寫法：
-function twoSum(nums, target) {
-  for (let i = 0; i < nums.length; i++) {
-    for (let j = 0; j < i; j++) {
-      if (target == nums[i] + nums[j]) {
-        return [i, j];
-      }
-    }
-  }
-}
+// // 另一個寫法：
+// function twoSum(nums, target) {
+//   for (let i = 0; i < nums.length; i++) {
+//     for (let j = 0; j < i; j++) {
+//       if (target == nums[i] + nums[j]) {
+//         return [i, j];
+//       }
+//     }
+//   }
+// }
 
-let result = twoSum([2, 11, 7, 15], 9);
-console.log(result);
+// let result = twoSum([2, 11, 7, 15], 9);
+// console.log(result);
 
 // 使用 for...of 改寫：
-function twoSum(nums, target) {
-  for(x of nums) {
-    for(y of nums) {
-      if(nums.indexOf(x) != nums.indexOf(y) && target == x + y) {
-        return [nums.indexOf(x), nums.indexOf(y)]
-      }
-    }
-  }
-}
+// function twoSum(nums, target) {
+//   for(x of nums) {
+//     for(y of nums) {
+//       if(nums.indexOf(x) != nums.indexOf(y) && target == x + y) {
+//         return [nums.indexOf(x), nums.indexOf(y)]
+//       }
+//     }
+//   }
+// }
 
-let result = twoSum([2, 11, 7, 15], 9);
-console.log(result);
+// let result = twoSum([2, 11, 7, 15], 9);
+// console.log(result);
 
 // 使用 for...in 改寫：
-function twoSum(nums, target) {
-  for (i in nums) {
-    for (j in nums) {
-      if (i != j && target == nums[i] + nums[j]) {
-        return [Number(i), Number(j)]
-      }
-    }
-  }
-}
+// function twoSum(nums, target) {
+//   for (i in nums) {
+//     for (j in nums) {
+//       if (i != j && target == nums[i] + nums[j]) {
+//         return [Number(i), Number(j)]
+//       }
+//     }
+//   }
+// }
 
-let result = twoSum([2, 11, 7, 15], 9);
-console.log(result);
+// let result = twoSum([2, 11, 7, 15], 9);
+// console.log(result);
 
 
 
