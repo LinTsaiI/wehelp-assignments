@@ -26,6 +26,7 @@
 
 
 06.使用 SELECT 指令取得欄位 username 是 test、且欄位 password 也是 test 的資料。
+
 ![alt text](https://github.com/LinTsaiI/wehelp-assignments/blob/main/week-5/mySQL%20command/06.png?raw=true)
 
 
@@ -41,6 +42,7 @@
 
 
 09.取得 member 資料表中，所有會員 follower_count 欄位的總和。
+
 ![alt text](https://github.com/LinTsaiI/wehelp-assignments/blob/main/week-5/mySQL%20command/09.png?raw=true)
 
 
@@ -55,6 +57,7 @@
 
 
 11.使用 SELECT 搭配 JOIN 語法，取得所有留言，結果須包含留言者會員的姓名。
+
 ![alt text](https://github.com/LinTsaiI/wehelp-assignments/blob/main/week-5/mySQL%20command/11.png?raw=true)
 
 
