@@ -42,6 +42,7 @@ avg({
 # 找出至少包含兩筆整數的列表 (Python) 或陣列 (JavaScript) 中，兩兩數字相乘後的最大值。
 # 不可以使用排序相關的內建函式。
 def maxProduct(nums):
+<<<<<<< HEAD
   n, numsNew = len(nums), []
   for i in range(n):
     for x in nums[(i+1):]:
@@ -49,12 +50,24 @@ def maxProduct(nums):
       numsNew.append(num)
   print(max(numsNew))
 
+=======
+  n = len(nums)
+  numsNew = []
+  for x in range(n):
+    for y in nums[(x+1):]:
+      num = nums[x] * y
+      numsNew.append(num)
+  print(max(numsNew))
+
+
+>>>>>>> e89314e55044992ad95a3b54509d3716f7bab729
 maxProduct([5, 20, 2, 6]) # 得到 120
 maxProduct([10, -20, 0, 3]) # 得到 30
 maxProduct([-1, 2]) # 得到 -2
 maxProduct([-1, 0, 2]) # 得到 0
 maxProduct([-1, -2, 0]) # 得到 2
 
+<<<<<<< HEAD
 # 另一個寫法
 # def maxProduct(nums):
 #   n = len(nums)
@@ -66,6 +79,8 @@ maxProduct([-1, -2, 0]) # 得到 2
 #         numsNew.append(num)
 #   print(max(numsNew))
 
+=======
+>>>>>>> e89314e55044992ad95a3b54509d3716f7bab729
 
 
 # 要求四 ( 請閱讀英文 ):演算法
@@ -85,7 +100,12 @@ print(result)  # show [0, 2] because nums[0]+nums[2] is 9
 # 要求五 (Optional): 演算法
 # 給定只會包含 0 或 1 兩種數字的列表(Python) 或陣列(JavaScript)，計算連續出現 0 的最大長度。
 def maxZeros(nums):
+<<<<<<< HEAD
   counter, numsNew = 0, []
+=======
+  counter = 0
+  numsNew = []
+>>>>>>> e89314e55044992ad95a3b54509d3716f7bab729
   for x in nums:
     if x == 0:
       counter += 1
