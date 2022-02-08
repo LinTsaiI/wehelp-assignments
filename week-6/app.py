@@ -40,15 +40,27 @@ def sign_up():
   name = request.form['name']
   username = request.form['username']
   password = request.form['password']
-  cursor.execute('SELECT username from member;')
-  username_list = cursor.fetchall()
-  if (username,) not in username_list:
-    cursor.execute(
-      'INSERT INTO member(name, username, password) VALUES (%s, %s, %s)', (name, username, password))
+  cursor.execute('SELECT NOT EXISTS(SELECT username from member WHERE username=%s);', (username,))
+  is_not_exist = cursor.fetchone()[0]
+  if is_not_exist:
+    cursor.execute('INSERT INTO member(name, username, password) VALUES (%(name)s, %(username)s, %(password)s);', {'name': name, 'username': username, 'password': password})
     db.commit()
     return redirect('/')
   else:
     return redirect(url_for('err', message='帳號已經被註冊'))
+      
+  
+  # 通常不會把所有資料一次抓出來，然後用程式去檢查，因資料筆數多時效率會不佳
+  # cursor.execute('SELECT username from member;')
+  # username_list = cursor.fetchall()
+  # if (username,) not in username_list:
+  #   cursor.execute(
+  #     'INSERT INTO member(name, username, password) VALUES (%s, %s, %s)', (name, username, password))
+  #   cursor.close()
+  #   db.commit()
+  #   return redirect('/')
+  # else:
+  #   return redirect(url_for('err', message='帳號已經被註冊'))
   
   
 
@@ -56,9 +68,9 @@ def sign_up():
 def check_member():
   username = request.form['signin_username']
   password = request.form['signin_password']
-  cursor.execute('SELECT username, password FROM member;')
-  member_list = cursor.fetchall()
-  if (username, password) in member_list:
+  cursor.execute('SELECT EXISTS(SELECT username, password FROM member WHERE username=%s AND password=%s);', (username, password))
+  is_member = cursor.fetchall()[0][0]
+  if is_member:
     session['logged_in'] = True
     cursor.execute('SELECT name FROM member WHERE username=%s', (username,))
     name = cursor.fetchone()[0]
@@ -73,6 +85,7 @@ def check_member():
 def sign_out():
   session['logged_in'] = False
   return redirect('/')
+
 
 if __name__ == '__main__':
   app.run(port=3000, debug=True)
