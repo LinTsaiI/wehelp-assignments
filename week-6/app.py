@@ -50,7 +50,7 @@ def sign_up():
   else:   # 若結果為None表不存在，將輸入的資料加入member
     cursor.execute('INSERT INTO member(name, username, password) VALUES (%s, %s, %s);', (name, username, password))
     db.commit()
-    return redirect('/')
+    return render_template('signup_successed.html')
 
   # 額外使用 NOT EXISTS 確認 username 是否存在 member 中 (比較麻煩的做法)
   # cursor.execute('SELECT NOT EXISTS(SELECT username from member WHERE username=%s);', (username,))
@@ -80,17 +80,16 @@ def sign_up():
 def check_member():
   username = request.form['signin_username']
   password = request.form['signin_password']
-  cursor.execute('SELECT username, password FROM member WHERE username=%s AND password=%s;', (username, password))
+  cursor.execute('SELECT name, username, password FROM member WHERE username=%s AND password=%s;', (username, password))
   match = cursor.fetchone()
   if match:
     session['logged_in'] = True
-    cursor.execute('SELECT name FROM member WHERE username=%s;', (username,))
-    name = cursor.fetchone()[0]
-    session['name'] = name
+    session['name'] = match[0]  # fetchone() 的[0]個位置為name
     return redirect('/member/')
   else:   # 若結果為None表沒有對應的(username, password)
     session['logged_in'] = False
     return redirect(url_for('err', message='帳號或密碼輸入錯誤'))
+
   # 額外使用 EXISTS 確認 username 與 password 是否已經存在 member 中 (比較麻煩的做法)
   # cursor.execute('SELECT EXISTS(SELECT username, password FROM member WHERE username=%s AND password=%s);', (username, password))
   # is_member = cursor.fetchall()[0][0]
