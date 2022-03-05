@@ -6,9 +6,14 @@ function queryMembers() {
   fetch(`http://127.0.0.1:3000/api/members?username=${username}`)
     .then(response => response.json())
     .then(result => {
-      let name = result.data.name;
-      document.getElementById('showName').innerHTML = name + ' (' + username + ')';
-    })
+      let data = result.data;
+      if (data) {
+        document.getElementById('showName').innerHTML = data.name + ' (' + username + ')';
+        document.getElementById('queryName').value = '';
+      } else {   // 若 response 為 data: null
+        document.getElementById('showName').innerHTML = '查無此會員';
+      }
+      })
     .catch(err => console.log('Error: ' + err))
 }
 
@@ -25,6 +30,7 @@ function updateName() {
     .then(result => {
       if (result.ok == true) {
         document.getElementById('showNewName').innerHTML = '更新成功';
+        document.getElementById('updateName').value = '';
       } else if(result.error == true) {
         document.getElementById('showNewName').innerHTML = '更新失敗';
       }
